@@ -44,13 +44,7 @@ str7=(f"Greatest Decrease in Profits: {minM} {minV}")
 textL=[str1,str2,str3,str4,str5,str6,str7]
 textFinal='\n'.join(textL)
 print(textFinal)
-# print(str1)
-# print(str2)
-# print(str3)
-# print(str4)
-# print(str5)
-# print(str6)
-# print(str7)
+
 
 textFile.writelines(textFinal)
 

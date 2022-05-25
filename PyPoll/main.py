@@ -1,20 +1,18 @@
 import os
 import csv
 
-csvpath= "/Users/alexanderpowers/Documents/GitHub/pythonChallenge/PyPoll/Resources/electionDataTest.csv"
+csvpath= "/Users/alexanderpowers/Documents/GitHub/pythonChallenge/PyPoll/Resources/election_data.csv"
+
 total=[]
 candidates=[]
-candOne=[]
-candTwo=[]
-candThree=[]
-candFour=[]
+
 
 
 with open(csvpath) as csvfile:
     csvreader=csv.reader(csvfile,delimiter=",")
-    # print(csvreader)
     csv_header = next(csvreader)
-    # print(f"CSV Header: {csv_header}")
+
+
 
     for row in csvreader:
 
@@ -24,19 +22,37 @@ with open(csvpath) as csvfile:
         if str(row[2]):
             candidates.append(str(row[2]))
             candidatesSet=set(candidates)
-            candTotal=int(len(candidatesSet))
             candSetList=list(candidatesSet)
-            for x in range(candTotal):
-                x=candidates.count(candSetList[int(candTotal)-1])
+        CandVotesAmount = {}
+        CandVotesPercent = {}
+        CandString = []
+print("hello")
+        for name in candidates:
+            CandVotesAmount[name]=candidates.count(name)
+            CandVotesPercent[name]=(CandVotesAmount[name]/totalVotes)*100
+        for name in candidatesSet:
+            CandString.append(f"{name}: {int(CandVotesPercent[name])}% ({CandVotesAmount[name]})")
 
-        # if str(candidatesSet) == str(row[2]):
-        #     candOne.append(str(row[2]))
-        #     totalCandOne=len(candOne)
+
+print("finished looping")
+textFile= open(r"/Users/alexanderpowers/Documents/GitHub/pythonChallenge/PyPoll/Analysis/analysis.txt", "w" )
+
+str1=("Election Results")
+str2=("-------------------------")
+str3=(f"Total Vote: {totalVotes}")
+str4=("-------------------------")
+strP='\n'.join(CandString)
+str5=("-------------------------")
+winner=max(CandVotesAmount,key=CandVotesAmount.get)
+str6=(f"Winner: {winner}")
+str7=("-------------------------")
+
+textL=[str1,str2,str3,str4,strP,str5,str6,str7]
+textFinal='\n'.join(textL)
+print(textFinal)
+
+textFile.writelines(textFinal)
 
 
-print(totalVotes)
-print(candidatesSet)
-print(x)
-    # # print(candidatesList)
 
 
